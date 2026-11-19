@@ -1,0 +1,10 @@
+{
+  "name": "tree-sitter-filter",
+  "version": "0.1.0",
+  "description": "DSL Filter parser for admin search",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "filter"
+  ]
+}
