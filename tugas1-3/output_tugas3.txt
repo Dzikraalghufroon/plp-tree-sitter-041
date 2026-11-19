@@ -1,0 +1,61 @@
+============================================================
+1. QUERY: NAMA FUNGSI & JUMLAH PARAMETER
+============================================================
+Menjalankan query 'tugas1-3/fungsi_params.scm' pada berkas 'tugas1-3/contoh_tugas3.py':
+
+--- DAFTAR FUNGSI DAN JUMLAH PARAMETER ---
+[1] Fungsi: fungsi_tanpa_param        | Baris: 13   | Jumlah Parameter: 0
+[2] Fungsi: hitung_luas_persegi       | Baris: 19   | Jumlah Parameter: 1
+[3] Fungsi: hitung_volume_balok       | Baris: 24   | Jumlah Parameter: 3
+[4] Fungsi: fungsi_tanpa_docstring    | Baris: 30   | Jumlah Parameter: 2
+[5] Fungsi: main                      | Baris: 34   | Jumlah Parameter: 0
+
+Total fungsi ditemukan: 5
+
+
+============================================================
+2. QUERY: PEMANGGILAN PRINT(...)
+============================================================
+Menjalankan query 'tugas1-3/cari_print.scm' pada berkas 'tugas1-3/contoh_tugas3.py':
+
+--- DAFTAR PEMANGGILAN PRINT(...) ---
+[1] Baris 16  : print("Menjalankan fungsi tanpa param:", x)
+[2] Baris 21  : print(f"Menghitung sisi: {sisi}")
+[3] Baris 27  : print(f"Volume = {hasil}")
+[4] Baris 35  : print("Mulai pengujian...")
+[5] Baris 39  : print("Selesai pengujian.")
+
+Total pemanggilan print ditemukan: 5
+
+
+============================================================
+3. QUERY: IMPORT DAN FROM IMPORT (NAMA MODUL)
+============================================================
+Menjalankan query 'tugas1-3/cari_import.scm' pada berkas 'tugas1-3/contoh_tugas3.py':
+
+--- DAFTAR MODUL IMPORT ---
+[1] Modul: os                        | Baris: 7
+[2] Modul: math                      | Baris: 8
+[3] Modul: datetime                  | Baris: 9
+[4] Modul: collections               | Baris: 10
+[5] Modul: json                      | Baris: 11
+
+Total modul di-import: 5
+
+
+============================================================
+4. QUERY PENGAYAAN: DOCSTRING FUNGSI
+============================================================
+Menjalankan query 'tugas1-3/cari_docstring.scm' pada berkas 'tugas1-3/contoh_tugas3.py':
+
+--- DAFTAR DOCSTRING FUNGSI ---
+[1] Fungsi: fungsi_tanpa_param     (baris 13)
+     Docstring: """Docstring: fungsi ini tidak menerima parameter sama sekali."""
+[2] Fungsi: hitung_luas_persegi    (baris 19)
+     Docstring: """Docstring: menghitung luas persegi."""
+[3] Fungsi: hitung_volume_balok    (baris 24)
+     Docstring: """Docstring: menghitung volume balok dari 3 parameter."""
+
+Total fungsi ber-docstring: 3
+
+
