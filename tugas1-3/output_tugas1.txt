@@ -1,0 +1,85 @@
+============================================================
+======== 1. PARSE 3 POTONGAN KODE & CETAK ROOT NODE ========
+============================================================
+
+--- Potongan 1 (Fungsi) ---
+Kode Sumber:
+def hitung_diskon(harga, persen):
+    return harga * (persen / 100)
+
+Pohon Sintaks (root_node):
+(module (function_definition name: (identifier) parameters: (parameters (identifier) (identifier)) body: (block (return_statement (binary_operator left: (identifier) right: (parenthesized_expression (binary_operator left: (identifier) right: (integer))))))))
+
+--- Potongan 2 (If/Else) ---
+Kode Sumber:
+if nilai >= 75:
+    status = "lulus"
+else:
+    status = "remedial"
+
+Pohon Sintaks (root_node):
+(module (if_statement condition: (comparison_operator (identifier) (integer)) consequence: (block (expression_statement (assignment left: (identifier) right: (string (string_start) (string_content) (string_end))))) alternative: (else_clause body: (block (expression_statement (assignment left: (identifier) right: (string (string_start) (string_content) (string_end))))))))
+
+--- Potongan 3 (Kelas dengan 1 method) ---
+Kode Sumber:
+class Rekening:
+    def setor(self, jumlah):
+        self.saldo += jumlah
+
+Pohon Sintaks (root_node):
+(module (class_definition name: (identifier) body: (block (function_definition name: (identifier) parameters: (parameters (identifier) (identifier)) body: (block (expression_statement (augmented_assignment left: (attribute object: (identifier) attribute: (identifier)) right: (identifier))))))))
+
+============================================================
+======= 2. IDENTIFIKASI NODE BERNAMA VS NODE ANONIM ========
+============================================================
+Contoh pada Potongan 1 (Fungsi):
+
+Node tingkat atas: function_definition (bernama)
+Semua children langsung dari function_definition:
+  - Child 0: def                    -> ANONIM (tersembunyi)                  | Teks: 'def'
+  - Child 1: identifier             -> BERNAMA               [field: name]   | Teks: 'hitung_diskon'
+  - Child 2: parameters             -> BERNAMA               [field: parameters] | Teks: '(harga, persen)'
+  - Child 3: :                      -> ANONIM (tersembunyi)                  | Teks: ':'
+  - Child 4: block                  -> BERNAMA               [field: body]   | Teks: 'return harga * (persen / 100)'
+
+Children di dalam node 'parameters':
+  - Child 0: (                      -> ANONIM (tersembunyi) | Teks: '('
+  - Child 1: identifier             -> BERNAMA              | Teks: 'harga'
+  - Child 2: ,                      -> ANONIM (tersembunyi) | Teks: ','
+  - Child 3: identifier             -> BERNAMA              | Teks: 'persen'
+  - Child 4: )                      -> ANONIM (tersembunyi) | Teks: ')'
+
+============================================================
+======= 3. ERROR RECOVERY: RUSAK KODE SECARA SENGAJA =======
+============================================================
+
+Kasus A: Menghapus tanda titik dua ':' pada def sapa(nama):
+Kode:
+def sapa(nama)
+    return "Halo " + nama
+
+Pohon hasil parse (perhatikan node ERROR / MISSING):
+(module (ERROR (identifier) (parameters (identifier)) (expression_statement (binary_operator left: (string (string_start) (string_content) (string_end)) right: (identifier)))))
+
+Kasus B: Menghapus tanda tutup kurung ')' pada def sapa(nama:
+Kode:
+def sapa(nama:
+    return "Halo"
+
+Pohon hasil parse (perhatikan node ERROR / MISSING):
+(module (ERROR (identifier) (typed_parameter (identifier) (ERROR) type: (type (string (string_start) (string_content) (string_end))))))
+
+============================================================
+======= 4. PERBEDAAN 'children' DAN 'named_children' =======
+============================================================
+Pada node function_definition:
+  - Jumlah total node di children       : 5
+    Tipe: ['def', 'identifier', 'parameters', ':', 'block']
+  - Jumlah total node di named_children : 3
+    Tipe: ['identifier', 'parameters', 'block']
+
+Penjelasan:
+- `children`: Mengembalikan semua token konkret dari Concrete Syntax Tree (CST),
+  termasuk node anonim seperti keyword 'def', operator, tanda kurung '(', ')', dan titik dua ':'.
+- `named_children`: Hanya mengembalikan node yang berasal dari named rule di grammar tree-sitter,
+  yaitu node yang memiliki identitas semantik/struktural seperti 'identifier', 'parameters', dan 'block'.
