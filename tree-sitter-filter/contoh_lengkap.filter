@@ -1,0 +1,1 @@
+status in ("open", "pending") and title contains "invoice" and active = true and count >= 5
