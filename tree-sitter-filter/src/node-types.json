@@ -1,21 +1,96 @@
 [
   {
+    "type": "and_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "and_expression",
+            "named": true
+          },
+          {
+            "type": "comparison",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "and_expression",
+            "named": true
+          },
+          {
+            "type": "comparison",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "comparison",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        }
-      ]
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "!=",
+            "named": false
+          },
+          {
+            "type": "<",
+            "named": false
+          },
+          {
+            "type": "<=",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": ">",
+            "named": false
+          },
+          {
+            "type": ">=",
+            "named": false
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -28,6 +103,10 @@
       "required": true,
       "types": [
         {
+          "type": "and_expression",
+          "named": true
+        },
+        {
           "type": "comparison",
           "named": true
         }
@@ -35,11 +114,39 @@
     }
   },
   {
+    "type": "!=",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
     "type": "=",
     "named": false
   },
   {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
+    "type": "and",
+    "named": false
+  },
+  {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "number",
     "named": true
   },
   {
